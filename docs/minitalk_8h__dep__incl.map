@@ -1,0 +1,9 @@
+<map id="include/minitalk.h" name="include/minitalk.h">
+<area shape="rect" id="Node000001" title="Header file for the Minitalk project." alt="" coords="111,5,249,31"/>
+<area shape="rect" id="Node000002" href="$client_8c.html" title="Sends a string message to the Minitalk server using UNIX signals." alt="" coords="5,79,104,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,40,76,81,74,76,147,35"/>
+<area shape="rect" id="Node000003" href="$server_8c.html" title="Minitalk server that receives messages bit&#45;by&#45;bit using UNIX signals." alt="" coords="129,79,231,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="183,44,183,79,177,79,177,44"/>
+<area shape="rect" id="Node000004" href="$utils_8c.html" title="Input validation and utility functions for the Minitalk project." alt="" coords="256,79,347,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="213,35,283,76,280,81,210,40"/>
+</map>
