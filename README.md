@@ -54,12 +54,15 @@
 <summary><strong> See details  </strong></summary>
 
 **1.** The **server** starts and prints its PID.
+
 **2.** The **client** takes the server PID and a message as input.
+
 **3.** Each character is broken down into bits and sent one bit at a time:
    - `SIGUSR1` represents binary `0`
    - `SIGUSR2` represents binary `1`
 
 **4.** The server rebuilds characters from incoming signals.
+
 **5.** The server sends an acknowledgment after each bit, allowing safe and synchronous transmission.
 
 📡 **Signal Flow** – Sequence Diagram
