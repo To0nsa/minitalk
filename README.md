@@ -134,10 +134,10 @@ Use the PID from the server output to send a message:
 <summary><strong> See project structure  </strong></summary>
 
 ```txt
-libft/
+minitalk/
 ├── include/         # Header file with function prototypes, librairies...
 ├── srcs/            # client.c / server.c /utils.c
-├── libft/           # Custom C library
+├── libft/           # Custom C library - git submodule
 ├── objs/            # Object files (auto-generated)
 └── Makefile         # Clean, silent build system with useful targets
 ```
