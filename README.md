@@ -2,7 +2,7 @@
 
 ![Language: C](https://img.shields.io/badge/language-C-blue.svg)
 ![Made at 42/Hive](https://img.shields.io/badge/made%20at-42%20Hive-blueviolet)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-minitalk-black?logo=github)](https://github.com/nicolas-lovis/minitalk)
+![GitHub Repo](https://img.shields.io/badge/GitHub-minitalk-black?logo=github)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 > **Minitalk** is a 42 project that demonstrates **inter-process communication (IPC)** using **Unix signals** (SIGUSR1, SIGUSR2). The client process encodes messages bit-by-bit, while the server side **acknowledges** each bit to ensure reliable, **synchronous data transfer**.
