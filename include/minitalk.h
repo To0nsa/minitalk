@@ -16,7 +16,7 @@
  *
  * Contains declarations for input validation, error handling,
  * and server/client utilities used in the Minitalk signal-based communication.
- * 
+ *
  * @author nlouis
  * @date 2025/12/14
  */
@@ -46,23 +46,23 @@
  */
 
 #ifndef MINITALK_H
-# define MINITALK_H
+#define MINITALK_H
 
 #ifndef _GNU_SOURCE
-# define _GNU_SOURCE
+#define _GNU_SOURCE
 #endif
 
-# include <signal.h>
-# include <sys/types.h>
-# include <stdio.h>
-# include <time.h>
-# include "libft.h"
+#include "libft.h"
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <time.h>
 
-void	validate_input_server(int argc, char **argv);
-void	display_information_server(pid_t pid);
-void	validate_input_client(int argc);
-pid_t	get_server_pid_from_input(char **argv);
+void  validate_input_server(int argc, char** argv);
+void  display_information_server(pid_t pid);
+void  validate_input_client(int argc);
+pid_t get_server_pid_from_input(char** argv);
 
-void	sys_error(char *error_message);
+void sys_error(char* error_message);
 
 #endif

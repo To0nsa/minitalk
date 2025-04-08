@@ -16,10 +16,10 @@
  *
  * This file contains helper functions for validating command-line arguments,
  * displaying the server's PID, and handling system errors gracefully.
- * 
+ *
  * These functions are used by both the client and server to ensure proper
  * argument formats and reliable error messaging.
- * 
+ *
  * @author nlouis
  * @date 2024/12/14
  * @ingroup utils
@@ -28,12 +28,12 @@
 
 /**
  * @brief Displays the server's PID and a waiting message.
- * 
+ *
  * @param pid The process ID of the server.
- * 
+ *
  * @ingroup utils
  */
-void	display_information_server(pid_t pid)
+void display_information_server(pid_t pid)
 {
 	printf("PID: %d\n", pid);
 	printf("Waiting for a message...\n");
@@ -41,17 +41,17 @@ void	display_information_server(pid_t pid)
 
 /**
  * @brief Validates the number of arguments passed to the server.
- * 
+ *
  * @param argc Argument count.
  * @param argv Argument values (unused).
- * 
+ *
  * Exits with an error message if the argument count is invalid.
- * 
+ *
  * @ingroup utils
  */
-void	validate_input_server(int argc, char **argv)
+void validate_input_server(int argc, char** argv)
 {
-	(void)argv;
+	(void) argv;
 	if (argc != 1)
 	{
 		fprintf(stderr, "Error: wrong format\n");
@@ -62,14 +62,14 @@ void	validate_input_server(int argc, char **argv)
 
 /**
  * @brief Validates the number of arguments passed to the client.
- * 
+ *
  * @param argc Argument count.
- * 
+ *
  * Exits with an error message if the argument count is invalid.
- * 
+ *
  * @ingroup utils
  */
-void	validate_input_client(int argc)
+void validate_input_client(int argc)
 {
 	if (argc != 3)
 	{
@@ -81,18 +81,18 @@ void	validate_input_client(int argc)
 
 /**
  * @brief Extracts and validates the server PID from the client's input.
- * 
+ *
  * @param argv Argument values (from main).
  * @return pid_t The converted and validated PID.
- * 
+ *
  * Exits with an error if the PID is invalid or non-positive.
- * 
+ *
  * @ingroup utils
  */
-pid_t	get_server_pid_from_input(char **argv)
+pid_t get_server_pid_from_input(char** argv)
 {
-	pid_t	pid;
-	
+	pid_t pid;
+
 	pid = ft_atoi(argv[1]);
 	if (pid <= 0)
 	{
@@ -104,14 +104,14 @@ pid_t	get_server_pid_from_input(char **argv)
 
 /**
  * @brief Prints an error message and exits the program.
- * 
+ *
  * @param error_message A custom error message to display.
- * 
+ *
  * Also prints the corresponding system error message via perror.
- * 
+ *
  * @ingroup utils
  */
-void	sys_error(char *error_message)
+void sys_error(char* error_message)
 {
 	fprintf(stderr, "Error: %s\n", error_message);
 	perror("System call error");

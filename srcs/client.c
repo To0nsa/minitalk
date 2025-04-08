@@ -42,7 +42,7 @@
  *    across signal handler and main code context.
  * @ingroup client
  */
-volatile sig_atomic_t	g_ack_received = 0;
+volatile sig_atomic_t g_ack_received = 0;
 
 /**
  * @brief Signal handler for SIGUSR1 sent by the server to acknowledge
@@ -61,36 +61,35 @@ volatile sig_atomic_t	g_ack_received = 0;
  * to the next bit.
  *
  * @param sig The signal number received (expected to be SIGUSR1).
- * 
+ *
  * @ingroup client
  */
-void	ack_handler(int sig)
+void ack_handler(int sig)
 {
-	(void)sig;
+	(void) sig;
 	g_ack_received = 1;
 }
-
 
 /**
  * @brief Sets up the signal handler for SIGUSR1 to acknowledge received bits.
  *
  * This function configures the client to listen for the `SIGUSR1` signal,
  * which the server sends to acknowledge receipt of a single bit.
- * 
+ *
  * It uses the `sigaction` system call to set the `ack_handler` function
  * as the signal handler. The `SA_RESTART` flag ensures that interrupted
  * system calls (like `pause()` or `read()`) are automatically restarted
  * after the signal handler returns.
- * 
+ *
  * The signal mask is initialized to an empty set, meaning no signals are
  * blocked while the handler runs.
- * 
+ *
  * @note If `sigaction` fails to set the handler, the program exits with an
  * error message using `sys_error()`.
- * 
+ *
  * @ingroup client
  */
-void	setup_ack_signal(void)
+void setup_ack_signal(void)
 {
 	struct sigaction sa;
 
@@ -122,15 +121,15 @@ void	setup_ack_signal(void)
  * @param pid The process ID of the server to which signals should be sent.
  * @param c The character to send to the server, one bit at a time
  * (most significant bit first).
- * 
+ *
  * @note If `kill` fails to send the signal, the program exits with an
  * error message using `sys_error()`.
- * 
+ *
  * @ingroup client
  */
-static void	send_char_bits(pid_t pid, char c)
+static void send_char_bits(pid_t pid, char c)
 {
-	int	bit;
+	int bit;
 
 	bit = 7;
 	while (bit >= 0)
@@ -165,10 +164,10 @@ static void	send_char_bits(pid_t pid, char c)
  *
  * @param pid The PID of the server process to which the message is sent.
  * @param msg The null-terminated message string to transmit.
- * 
+ *
  * @ingroup client
  */
-static void	send_message(pid_t pid, const char *msg)
+static void send_message(pid_t pid, const char* msg)
 {
 	while (*msg)
 		send_char_bits(pid, *msg++);
@@ -188,12 +187,12 @@ static void	send_message(pid_t pid, const char *msg)
  * @param argc Argument count; should be exactly 3.
  * @param argv Argument vector; expects the server PID and message.
  * @return int EXIT_SUCCESS on success, or exits with error otherwise.
- * 
+ *
  * @ingroup client
  */
-int	main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-	pid_t	pid;
+	pid_t pid;
 
 	validate_input_client(argc);
 	pid = get_server_pid_from_input(argv);

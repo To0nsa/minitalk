@@ -18,10 +18,10 @@
  * binary 1 and 0. It reconstructs each character from the received bits and
  * prints the message to standard output. An acknowledgment signal is sent
  * back to the client after each bit.
- * 
+ *
  * This server resets its internal state once it receives a null terminator.
  * It supports communication from one client at a time.
- * 
+ *
  * @author nlouis
  * @date 2024/12/14
  * @ingroup server
@@ -38,7 +38,7 @@
  * It is initialized to 0 and updated with the sender's PID when a signal is
  * received. This value is used by the server to send acknowledgment signals
  * back to the correct client.
- * 
+ *
  * @ingroup server
  */
 volatile sig_atomic_t g_client_pid = 0;
@@ -46,22 +46,22 @@ volatile sig_atomic_t g_client_pid = 0;
 /**
  * @brief Processes a single received signal and updates the current character.
  *
- * This function modifies the character `c` by setting or clearing a specific bit
- * depending on the received signal (`SIGUSR1` or `SIGUSR2`). The `bit` index is
- * decremented after each update to prepare for the next incoming bit.
+ * This function modifies the character `c` by setting or clearing a specific
+ * bit depending on the received signal (`SIGUSR1` or `SIGUSR2`). The `bit`
+ * index is decremented after each update to prepare for the next incoming bit.
  *
  * @param sig The received signal. `SIGUSR1` represents bit 1, `SIGUSR2` bit 0.
  * @param bit A pointer to the current bit index (starting from 7 to 0).
  * @param c A pointer to the character being constructed bit by bit.
- * 
+ *
  * @ingroup server
  */
-static void	handle_received_bit(int sig, int *bit, char *c)
+static void handle_received_bit(int sig, int* bit, char* c)
 {
 	if (sig == SIGUSR1)
-		*c |= (1 << *bit);		// Set bit to 1
+		*c |= (1 << *bit); // Set bit to 1
 	else
-		*c &= ~(1 << *bit);		// Set bit to 0
+		*c &= ~(1 << *bit); // Set bit to 0
 	(*bit)--;
 }
 
@@ -76,12 +76,13 @@ static void	handle_received_bit(int sig, int *bit, char *c)
  *
  * @param c Pointer to the character that has been constructed from bits.
  * @param bit Pointer to the current bit index; reset to 7 after processing.
- * 
- * @note If `write`, the program exits with an error message using `sys_error()`.
- * 
+ *
+ * @note If `write`, the program exits with an error message using
+ * `sys_error()`.
+ *
  * @ingroup server
  */
-static void	process_character(char *c, int *bit)
+static void process_character(char* c, int* bit)
 {
 	if (*bit < 0)
 	{
@@ -96,7 +97,7 @@ static void	process_character(char *c, int *bit)
 				sys_error("Server: write failed");
 		}
 		*bit = 7;
-		*c = 0;
+		*c   = 0;
 	}
 }
 
@@ -113,18 +114,18 @@ static void	process_character(char *c, int *bit)
  * @param sig The received signal (either `SIGUSR1` or `SIGUSR2`).
  * @param info Information about the signal, including the sender's PID.
  * @param context Additional context information (unused).
- * 
+ *
  * @note If `kill` fails to send the signal, the program exits with an
  * error message using `sys_error()`.
- * 
+ *
  * @ingroup server
  */
-void	signal_handler(int sig, siginfo_t *info, void *context)
+void signal_handler(int sig, siginfo_t* info, void* context)
 {
-	static int		bit = 7;
-	static char		c = 0;
+	static int  bit = 7;
+	static char c   = 0;
 
-	(void)context;
+	(void) context;
 	g_client_pid = info->si_pid;
 
 	handle_received_bit(sig, &bit, &c);
@@ -147,15 +148,15 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
  *
  * If the signal registration fails, an error message is printed and
  * the program exits using `sys_error`.
- * 
+ *
  * @ingroup server
  */
-void	setup_signals(void)
+void setup_signals(void)
 {
-	struct sigaction	sa;
+	struct sigaction sa;
 
 	sa.sa_sigaction = signal_handler;
-	sa.sa_flags = SA_SIGINFO | SA_RESTART;
+	sa.sa_flags     = SA_SIGINFO | SA_RESTART;
 	sigemptyset(&sa.sa_mask);
 
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
@@ -177,13 +178,13 @@ void	setup_signals(void)
  * @param argc Argument count (should be 1 for server).
  * @param argv Argument vector (not used).
  * @return int returns EXIT_SUCCESS (not actually reached).
- * 
+ *
  * @ingroup server
  */
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-	pid_t	pid;
-	
+	pid_t pid;
+
 	validate_input_server(argc, argv);
 	pid = getpid();
 	display_information_server(pid);
@@ -194,4 +195,3 @@ int main(int argc, char **argv)
 
 	return (EXIT_SUCCESS);
 }
-
